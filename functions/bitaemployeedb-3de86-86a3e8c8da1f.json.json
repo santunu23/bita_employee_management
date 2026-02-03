@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "bitaemployeedb-3de86",
+  "private_key_id": "86a3e8c8da1f897f07fa1102319f43a02d031eef",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDDAPsiyyQfkeBT\nYSiI6YY87dsBgqVIxhMS4BS+9OaWbdpNZS75gmzofPDAlUz+K56M+eZdlr4Vm3W5\nlf6/XXifTOFkkmW0RPyKVJGBWWBYQgCI6FN40u10W9SP76iRSuiCn0Okip+IgUFh\nd44QTQzyWfoEMToKxWI6doPrE30So81qxs+S36r6JKGUl81sScRJMxqYclOm6Xsa\n6ylmJlITQhrkzP8jKFnGm89BTU3hl5rHGJmlUssvTWPK1feCuEi74gAAH7LWHVgf\nNpOlZkbEt9grjrRtsDQANo6g+kvUTqzpG7aAt+Y6ti5FNmctBkMFQnn1VtOG7MOW\nxfRmxIX1AgMBAAECggEAFc1Dxq7okdZY5WmSQxsSGjjLngkcb/JOn/Meo/+J0kgO\nOqNKk7R8dv0VBlW1lHXjAEb7oFC3XX9n3kEXXg+Av2q0iRksYXG/EbuFGG2aLck/\nTw85Lzksjtr/fRI3NKX9MIbG5Ma83GGlzNRgNTwFa7PElfhnprGicFU0yDEBxaC0\nE3KQ0dddI2FPNw2Zs2bSE1rcEoHIP61asElJ5BDRCJdG6oMuL32b/gYYJq3xUQ/R\n3kert7ScoIzhp7OUpst1KGthGXl5eFI0np2ubGav5/4ger/SQ20eh1VthJeK5fzc\ni/YItz6tQmd0UT1+Hm3hVlf3fFIgth6CrGyfZwJoBwKBgQD54pjcqzLUauAPDQR1\niV0oBzMbn++BjH0ICv9CXMmELXQUE4wP0r5j4uH6LNwtc9T7YID9xGfA1okR0DON\naa9Jv0uehJIrdEfjgqHwfJGShc6uxhD94w9lk07GFuFpD4OtjbQCuDDvc5CGXkD9\noSRyEDIZr3ce16cpXAbWiJdQuwKBgQDHxpSZstv3Czy5sdEZjl3YxVv33YynHOOW\nqNqSmGqqYs3FKemX51ry/yTNUF6n7/0WvEWJ3Eh4w50++zPiypC6U0G/XJDPJahm\nCu9WE5caRvr8s+xZ4cHUomvHvy8hXCSl/ZqnY0v24r8w6ZRwjecZoJbvl5dJ811z\nCt1bLKkxDwKBgD8/h4lzG66ATq4AkXxehGG5UMpRNQIJWSxL/EgDzE3UY2kheXYX\n1XDa4G++IwyuIN5vkraom8pHgvIrTKEieuejr7QzwfuVtwxy6CJCpWX80E+UeoCI\nlEEVg/7Hk85PyviGwWVe0aQKEC6ydKi9vMfSKZwuuWvpEbp6PJDYidQ5AoGBAJth\nY6Dr0VQjZFbV69mhtnJshmyR39z2hjlfGamdbJEbigoI4EuqwT1wnxIlqYmbClFN\nnBRuxdtP4hTjUubZQJn7OY76ExNaqdC8PozHbeYdQQeddX4vLhARSB0zIRgkT8jf\nKBN7EtFyaNxFQJQOeqmfEuZFFIGLDKr2z1YjtXCXAoGBAOXjmKVF8TfzavnssXKv\nIz5xy2SOBgV0gQWxqU3p/fD+9c9uFXQxLjJpAFo4bOeXzhBE6fGyrJhvgMJruKLU\nhdV2dTwD9F3lj+XaHmyRClskId6bQr7/0gr2A28dcoSgr8uRlbo7kVrSG3FpPMuj\nvCzbbdfiDkcHk00rPvig71Z9\n-----END PRIVATE KEY-----\n",
+  "client_email": "bita-employee-db@bitaemployeedb-3de86.iam.gserviceaccount.com",
+  "client_id": "116966791907966363564",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bita-employee-db%40bitaemployeedb-3de86.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
