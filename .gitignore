@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignore function files
+functions/lib/*.json
+functions/src/index.ts
+src/environments/environment.ts
