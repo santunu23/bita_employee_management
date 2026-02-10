@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { NgForm,FormBuilder,FormGroup, Validators,FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
+import { lastValueFrom } from 'rxjs'; // এটি নিশ্চিত করুন
 import { DataService } from '../data.service';
+import imageCompression from 'browser-image-compression';
+
 
 @Component({
   selector: 'app-registration',
@@ -15,166 +16,127 @@ import { DataService } from '../data.service';
 })
 export class RegistrationComponent implements OnInit {
   
-  img:any;
+  img: any;
   selectedFile: any;
-  ref:any;
-  task:any;
-  randomId= Math.random().toString(36).substring(2);
-  registrationForm:FormGroup;
-  
+  registrationForm: FormGroup;
 
   constructor(
-    private fb:FormBuilder,
-    private spinner:NgxSpinnerService,
-    private asstorage:AngularFireStorage,
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private asstorage: AngularFireStorage,
     private fns: AngularFireFunctions,
-    private firebaseservice: DataService
+    private db: AngularFirestore,
+    private firebaseservice: DataService,
   ) { }
 
   ngOnInit(): void {
-     this.registrationForm=this.fb.group({
-      fullname:[null,[Validators.required,Validators.minLength(3)]],
-      gender:[null,[Validators.required]],
-      fname:[null,[Validators.required]],
-      mname:[null,[Validators.required]],
-      maritialstatus:[null,[Validators.required]],
-      nationality:[null,[Validators.required]],
-      bgroup:[null,[Validators.required]],
-      religion:[null,[Validators.required]],
-      paddress:[null,[Validators.required,Validators.minLength(3)]],
-      praddress:[null,[Validators.required,Validators.minLength(3)]],
-      nino:[null,[Validators.required,Validators.minLength(3)]],
-      mno:[null,[Validators.required,Validators.pattern,Validators.minLength(10),Validators.maxLength(11)]],
-      email:[null,[Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      emno:[null,[Validators.required,Validators.pattern,Validators.minLength(10),Validators.maxLength(11)]],
-
-   })
-  }
-  //   createProjectname():FormGroup{
-  //   return this.fb.group({
-  //     pname:[null,[Validators.required]],
-  //     jdate:['',[Validators.required,Validators.pattern]],
-  //     rdate:['',[Validators.required,Validators.pattern]]
-  //   })
-  // }
-    upload(event:Event){
-      this.selectedFile=(event.target as HTMLInputElement).files[0];
-      let reader=new FileReader();
-      reader.readAsDataURL(this.selectedFile);
-      reader.onload=()=>{
-        this.img=reader.result
-      };
-  }
-    submitData(){
-      if(this.registrationForm.status=='VALID' && this.img){
-          this.spinner.show();
-          const base64Data = this.img.split(',')[1];
-          const callable = this.fns.httpsCallable('uploadToDrive');
-          console.log("Calling Firebase Function...");
-            callable({ imageStream: base64Data }).subscribe({
-                  next: (res) => {
-                    console.log("Success:", res);
-                    if (res.success) {
-                      console.log("submitdata "+res);
-                      // সার্ভার থেকে আসা ID এবং Password সহ ফাইনাল অবজেক্ট তৈরি
-                      let employeeData = {
-                        fullname: this.registrationForm.value['fullname'],
-                        gtype: this.registrationForm.value['gender'],
-                        fname: this.registrationForm.value['fname'],
-                        mname: this.registrationForm.value['mname'],
-                        maritialstatus: this.registrationForm.value['maritialstatus'],
-                        bgroup: this.registrationForm.value['bgroup'],
-                        religion: this.registrationForm.value['religion'],
-                        paddress: this.registrationForm.value['paddress'],
-                        praddress: this.registrationForm.value['praddress'],
-                        nationality: this.registrationForm.value['nationality'],
-                        nino: this.registrationForm.value['nino'],
-                        mno: this.registrationForm.value['mno'],
-                        emno: this.registrationForm.value['emno'],
-                        email: this.registrationForm.value['email'],
-                        
-                        
-                        // সার্ভার থেকে প্রাপ্ত তথ্য
-                        img: res.link,              // গুগল ড্রাইভ লিঙ্ক
-                        userid: res.employeeId,     // ৮ ডিজিটের র‍্যান্ডম আইডি
-                        password: res.tempPassword, // ৬ ডিজিটের র‍্যান্ডম পাসওয়ার্ড
-                        createdAt: new Date().toISOString()
-                      };
-
-                      // Save in firestore database
-                      this.firebaseservice.submitNewMember(employeeData).then((docRef) => {
-                        console.log("SUCCESS: Data saved to Firestore!",docRef.id);
-                         console.log("Get clicked from the firebase service "+' image '+employeeData.img+', userid'+employeeData.userid+', password'+employeeData.password+employeeData.createdAt);
-                        this.spinner.hide();
-                        alert(`সফলভাবে নিবন্ধিত হয়েছে!\nID: ${res.employeeId}\nPassword: ${res.tempPassword}`);
-                        this.registrationForm.reset();
-                        this.img = null;
-                      }).catch(err => {
-                        this.spinner.hide();
-                        console.error("Database Error:", err);
-                      });
-                    }
-                  },
-                  error: (err) => {
-                    this.spinner.hide();
-                    console.error("Cloud Function Error:", err);
-                    alert("সার্ভারে ইমেজ আপলোড করতে সমস্যা হয়েছে। আপনার কার্ড বা ব্লেজ প্ল্যান চেক করুন।");
-                  }
+    this.registrationForm = this.fb.group({
+      fullname: [null, [Validators.required, Validators.minLength(3)]],
+      gender: [null, [Validators.required]],
+      fname: [null, [Validators.required]],
+      mname: [null, [Validators.required]],
+      maritialstatus: [null, [Validators.required]],
+      nationality: [null, [Validators.required]],
+      bgroup: [null, [Validators.required]],
+      religion: [null, [Validators.required]],
+      paddress: [null, [Validators.required, Validators.minLength(3)]],
+      praddress: [null, [Validators.required, Validators.minLength(3)]],
+      nino: [null, [Validators.required, Validators.minLength(3)]],
+      mno: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
+      email: [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      emno: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
     });
-  } else {
-    alert("অনুগ্রহ করে সব তথ্য দিন এবং একটি ছবি সিলেক্ট করুন।");
   }
-              // this.ref = this.asstorage.ref(this.randomId);
-              // this.task = this.ref.put(this.selectedFile).then((res:any)=>{
-              //   if(res){
-              //   const downloadURL=this.ref.getDownloadURL().subscribe((url:any)=>{
-              //     URL=url;
-              //     if(URL.length>0){
-              //       let res={
-              //         fullname :this.registrationForm.value['fullname'],
-              //         gtype:this.registrationForm.value['gender'],
-              //         fname:this.registrationForm.value['fname'],
-              //         mname:this.registrationForm.value['mname'],
-              //         maritialstatus:this.registrationForm.value['maritialstatus'],
-              //         bgroup: this.registrationForm.value['bgroup'],
-              //         religion:this.registrationForm.value['religion'],
-              //         paddress:this.registrationForm.value['paddress'],
-              //         praddress:this.registrationForm.value['praddress'],
-              //         nationality: this.registrationForm.value['nationality'],
-              //         nino: this.registrationForm.value['nino'],
-              //         mno : this.registrationForm.value['mno'],
-              //         emno:this.registrationForm.value['emno'],
-              //         email:this.registrationForm.value['email'],
-              //         img:URL,
-              //         userid:this.randomId,
-              //         projectinvolvement:this.registrationForm.value['tickets']
-              //       }
-              //       console.log(res);
-              //       // this.firebaseservice.submitnewmember(res).then(e=>{
-              //       //       if(e){
-              //       //         this.spinner.hide();
-              //       //         this.dialog.open(SuccessmessageComponent);
-              //       //         // form.reset();
-              //       //         this.img=""
-              //       //       }else{
-              //       //         this.spinner.hide();
-              //       //       }
-              //       //     });
-              //       }
-              //   })
-              //   }
-              //   }).catch((error:any)=>{
-              //         console.log(error); 
-              // })
-        }
-   }
-  //   addData(){
-  //   this.tickets.push(this.createProjectname());
-  // }
 
-  //   get tickets():FormArray{
-  //   return <FormArray>this.registrationForm.get('tickets')
-  // }
-  //   deleteValue(i){
-  //   this.tickets.removeAt(i);
-  // }
+  upload(event: Event) {
+    this.selectedFile = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = () => {
+      this.img = reader.result;
+    };
+  }
+
+  async submitData() {
+    if (this.registrationForm.valid && this.selectedFile) {
+      this.spinner.show();
+      console.log("Starting Submission...");
+          const options = {
+                maxSizeMB: 0.2,          // সর্বোচ্চ সাইজ হবে ২০০ কেবি
+                maxWidthOrHeight: 1024,  // সর্বোচ্চ পিক্সেল ১০২৪
+                useWebWorker: true
+              };
+      try {
+        // ধাপ ১: সার্ভার থেকে আইডি ও পাসওয়ার্ড জেনারেট করা
+        //const callable = this.fns.httpsCallable('generateCredentials');
+        //const credentials: any = await lastValueFrom(callable({}));
+        const response = await fetch('https://us-central1-bitaemployeedb23.cloudfunctions.net/generateCredentials');
+        const credentials = await response.json();
+        const empId = credentials.employeeId;
+        const pass = credentials.tempPassword;
+        console.log("ID Generated:", empId);
+        console.log("ID Generated:", pass);
+        const compressedFile = await imageCompression(this.selectedFile, options);
+
+        // ধাপ ২: ছবি আপলোড (আইডি অনুযায়ী নামকরণ)
+        const filePath = `employees/${empId}_photo.jpg`;
+        const fileRef = this.asstorage.ref(filePath);
+        const task = this.asstorage.upload(filePath, compressedFile);
+
+        // ধাপ ৩: আপলোড শেষ হওয়া পর্যন্ত অপেক্ষা এবং লিঙ্ক নেওয়া
+        const snapshot = await task.snapshotChanges().toPromise();
+        console.log("Image Uploaded!");
+        const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
+        console.log("Download URL:", downloadURL);
+        // ধাপ ৪: user_details and employee_db তে সেভ
+        console.log("Saving to Firestore...");        
+             
+        let userdetailsdata={
+              userid: empId,
+              password: pass,
+              role: 'employee',
+              status: 'active'
+        }
+
+        let addnewMember={
+          fullname: this.registrationForm.value['fullname'],
+          gtype: this.registrationForm.value['gender'],
+          fname: this.registrationForm.value['fname'],
+          mname: this.registrationForm.value['mname'],
+          maritialstatus: this.registrationForm.value['maritialstatus'],
+          bgroup: this.registrationForm.value['bgroup'],
+          religion: this.registrationForm.value['religion'],
+          paddress: this.registrationForm.value['paddress'],
+          praddress: this.registrationForm.value['praddress'],
+          nationality: this.registrationForm.value['nationality'],
+          nino: this.registrationForm.value['nino'],
+          mno: this.registrationForm.value['mno'],
+          emno: this.registrationForm.value['emno'],
+          email: this.registrationForm.value['email'],
+          userid: empId,
+          img: downloadURL,
+          createdAt: new Date().toISOString()
+        }
+         await Promise.all([
+                  await this.firebaseservice.submituserdetails(userdetailsdata),
+                  await this.firebaseservice.submitNewMember(addnewMember)
+        ])
+      
+        console.log("Firestore Data Saved Successfully!");
+        this.spinner.hide();
+        alert(`Success! Please save your User ID and Password!\n User ID: ${empId}\nPassword: ${pass}`);
+        this.registrationForm.reset();
+        this.img = null;
+        // this.cService.set('username',empId);
+        // this.cService.set('urole','employee');
+
+      } catch (error) {
+        this.spinner.hide();
+        console.error("Full Error Details:", error);
+        alert("সমস্যা হয়েছে: " + (error.message || "Unknown Error"));
+      }
+    } else {
+      alert("অনুগ্রহ করে সব তথ্য দিন এবং একটি ছবি সিলেক্ট করুন।");
+    }
+  }
+}

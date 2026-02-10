@@ -1,0 +1,58 @@
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="row w-100">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+      <mat-card class="p-0 shadow-lg login-card">
+        <div class="row no-gutters">
+
+          <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center login-image-section">
+            <img 
+              src="assets/img/Log_in.jpg"
+              alt="Login Illustration" 
+              class="img-fluid rounded-left login-illustration"
+            >
+          </div>
+
+          <div class="col-md-6 p-4 p-md-5">
+            <h2 class="text-center mb-4 login-title">Sign In to BITA EmployeeDB</h2>
+            <hr class="mb-4">
+
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+              
+              <mat-form-field class="w-100 mb-3" appearance="outline">
+                <mat-label>Username (Employee ID)</mat-label>
+                <input matInput formControlName="username" placeholder="e.g. EMP-2026-001" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
+                  Username is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-100 mb-4" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+                  Password is required.
+                </mat-error>
+              </mat-form-field>
+
+              <button 
+                mat-raised-button 
+                color="primary" 
+                class="w-100 py-3 font-weight-bold login-button" 
+                type="submit" 
+                [disabled]="!loginForm.valid"
+              >
+                <mat-icon class="mr-2">lock_open</mat-icon>
+                SIGN IN
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

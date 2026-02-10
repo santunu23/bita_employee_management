@@ -1,0 +1,41 @@
+/* সাকসেস গ্রিন কালার থিম */
+.goodbye-text {
+  color: #28a745 !important; /* Success Green */
+  margin-bottom: 15px;
+}
+
+.message-text {
+  color: #555;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* বাটন স্টাইল */
+.btn-green-logout {
+  background-color: #28a745 !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  transition: transform 0.2s ease;
+}
+
+.btn-green-logout:hover {
+  background-color: #218838 !important;
+  transform: scale(1.05); /* হোভার করলে কিছুটা বড় হবে */
+}
+
+/* ছবির কন্টেইনার */
+.logout-image-container {
+  padding: 10px;
+  border-right: 2px solid #e8f5e9; /* হালকা সবুজ বিভাজক রেখা */
+}
+
+@media (max-width: 767px) {
+  .logout-image-container {
+    border-right: none;
+    border-bottom: 2px solid #e8f5e9;
+    padding-bottom: 30px;
+  }
+}

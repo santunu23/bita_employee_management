@@ -1,0 +1,19 @@
+/* সাবমিট বাটনের কাস্টম স্টাইল */
+.btn-submit-green {
+    background-color: #28a745 !important; /* সাকসেস গ্রিন কালার */
+    color: white !important; /* লেখার রঙ সাদা */
+    font-weight: 500;
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* মাউস নিলে হালকা গাঢ় রঙ হবে */
+.btn-submit-green:hover {
+    background-color: #218838 !important;
+}
+
+/* আইকনের রঙ সাদা করার জন্য */
+.btn-submit-green mat-icon {
+    color: white !important;
+}

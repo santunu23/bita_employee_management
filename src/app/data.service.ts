@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { arrayUnion } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,18 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class DataService {
 
   constructor(private db: AngularFirestore) { }
+  async submituserdetails(data:any){
+    console.log("Come to the service.")
+    return this.db.collection('/user_details').doc(data.userid).set({
+            userid: data.userid,
+            password:data.password,
+            role: data.role,
+            status: data.status
+    })
+  }
   submitNewMember(resData: any) {
     console.log(resData);
-    return this.db.collection('/employee').add({
+    return this.db.collection('/employee_db').doc(resData.userid).set({
                         fullname:resData.fullname,
                         gtype:resData.gtype,
                         fname:resData.fname,
@@ -26,9 +36,52 @@ export class DataService {
                         email:resData.email,
                         img:resData.img,
                         userid:resData.userid,
-                        password:resData.password,
                         createAt:resData.createdAt
 
     });
+  }
+ async saveEmployeeExperience(empId: string, experienceData: any){
+  const docRef= this.db.collection('EmployeeExperiences').doc(empId);
+  const doc = await docRef.get().toPromise();
+    if(doc.exists){
+              return this.db.collection('EmployeeExperiences').doc(empId).set({
+            employeeId: empId,
+            experiencedata: arrayUnion(...experienceData),
+            updatedAt: new Date()
+          },{merge:true});
+    }else{
+            return docRef.set({
+              employeeId: empId,
+              experiencedata: experienceData,
+              updatedAt: new Date()
+           });
+    }
+  }
+
+  async saveTrainingData(empId:string, trainingdata:any[]){
+    const docRef = this.db.collection('trainingdatacollection').doc(empId);
+    // ১. প্রথমে ডকুমেন্টটি রিড করে দেখা
+   const doc = await docRef.get().toPromise();
+   if (doc.exists) {
+        return this.db.collection('trainingdatacollection').doc(empId).set({
+        employeeId: empId,
+        trainingdata: arrayUnion(...trainingdata),
+        updatedAt: new Date()
+      },{merge:true});
+   }else{
+        return docRef.set({
+        employeeId: empId,
+        trainingdata: trainingdata,
+        updatedAt: new Date()
+    });
+   }
+
+  }
+
+  login(username:string,password:string){
+    return this.db.collection('/user_details', ref=>
+      ref.where('userid','==',username)
+      .where('password','==',password)
+    ).valueChanges(); 
   }
 }

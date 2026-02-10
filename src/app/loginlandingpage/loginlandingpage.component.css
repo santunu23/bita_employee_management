@@ -1,0 +1,31 @@
+/* ওয়েলকাম টেক্সটের রঙ সবুজ */
+.welcome-text {
+  color: #28a745 !important; 
+  margin-bottom: 20px;
+}
+
+/* সবুজ বাটন স্টাইল */
+.btn-green-welcome {
+  background-color: #28a745 !important;
+  color: white !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-radius: 50px !important; /* ওভাল শেপ */
+  transition: all 0.3s ease;
+}
+
+.btn-green-welcome:hover {
+  background-color: #218838 !important;
+  transform: translateY(-3px); /* হোভার করলে একটু উপরে উঠবে */
+}
+
+/* ছবির জন্য স্পেশাল ইফেক্ট */
+.doodle-image {
+  max-width: 80%;
+  border: 5px solid #e8f5e9; /* হালকা সবুজ বর্ডার */
+}
+
+.illustration-container {
+  padding: 20px;
+  background: radial-gradient(circle, rgba(40, 167, 69, 0.1) 0%, rgba(255,255,255,0) 70%);
+}

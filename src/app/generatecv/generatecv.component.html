@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 overflow-hidden">
+    <div class="row g-0 align-items-center">
+      
+      <div class="col-md-5 d-none d-md-block bg-light text-center p-4">
+        <img src="assets/img/generate_cv.jpg" alt="AI Resume Generation" class="img-fluid rounded shadow-sm">
+      </div>
+
+      <div class="col-md-7 p-5">
+        <h2 class="text-success font-weight-bold mb-3"> Your Resume, Your Identity</h2>
+        <p class="text-muted lead">
+          You can generate a professional CV based on the data you've uploaded and your personal information. 
+          <strong>But first, please ensure you have completed all the sections with accurate data.</strong>
+        </p>
+        
+        <div class="mt-4">
+            <button mat-raised-button 
+                  class="btn-generate-cv-green px-5 py-3 shadow" 
+                  (click)="generateCV()">
+            <mat-icon class="me-2 text-white">psychology</mat-icon>
+            GENERATE MY CV NOW
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

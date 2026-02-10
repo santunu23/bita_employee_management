@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "bitaemployeedb-3de86"
-  }
+    "default": "bitaemployeedb23",
+    "bitaemployeedb23": "bitaemployeedb23"
+  },
+  "targets": {},
+  "etags": {}
 }

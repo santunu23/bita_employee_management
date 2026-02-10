@@ -20,11 +20,36 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { TestcomponenetComponent } from './testcomponenet/testcomponenet.component';
+import { EducatioQualificationComponent } from './educatio-qualification/educatio-qualification.component';
+import { WorkexperienceComponent } from './workexperience/workexperience.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SalaryBenefitComponent } from './salary-benefit/salary-benefit.component';
+import { MatTableModule } from '@angular/material/table';
+import { TrainingDataComponent } from './training-data/training-data.component';
+import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
+import { LoginlandingpageComponent } from './loginlandingpage/loginlandingpage.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { GeneratecvComponent } from './generatecv/generatecv.component';
+import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR, REGION } from '@angular/fire/compat/functions';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    TestcomponenetComponent,
+    EducatioQualificationComponent,
+    WorkexperienceComponent,
+    SalaryBenefitComponent,
+    TrainingDataComponent,
+    RegistrationDetailsComponent,
+    LoginlandingpageComponent,
+    LoginComponent,
+    LogoutComponent,
+    NavbarComponent,
+    GeneratecvComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +62,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
     MatCardModule,
@@ -45,11 +69,17 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatNativeDateModule
+    
 
 
 
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    { provide: REGION, useValue: 'us-central1' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Please Wait...</p>
+  </ngx-spinner>
+  <h3 class="text-success mb-4">Educational Qualification</h3>
+  <form [formGroup]="educationForm">
+    
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light font-weight-bold">SSC / Equivalent</div>
+      <div class="card-body row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Board</mat-label>
+            <mat-select formControlName="sscBoard">
+              <mat-option *ngFor="let board of boards" [value]="board">{{board}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subject</mat-label>
+            <mat-select formControlName="sscSubject">
+              <mat-option value="Science">Science</mat-option>
+              <mat-option value="Commerce">Commerce</mat-option>
+              <mat-option value="Arts">Arts</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Grade (GPA)</mat-label>
+            <input matInput type="number" step="0.01" formControlName="sscGrade" placeholder="e.g. 5.00">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light font-weight-bold">HSC / Equivalent</div>
+      <div class="card-body row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Board</mat-label>
+            <mat-select formControlName="hscBoard">
+              <mat-option *ngFor="let board of boards" [value]="board">{{board}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subject</mat-label>
+            <mat-select formControlName="hscSubject">
+              <mat-option value="Science">Science</mat-option>
+              <mat-option value="Commerce">Commerce</mat-option>
+              <mat-option value="Arts">Arts</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Grade (GPA)</mat-label>
+            <input matInput type="number" step="0.01" formControlName="hscGrade" placeholder="e.g. 4.50">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light font-weight-bold">Graduation (Pass/Hons)</div>
+      <div class="card-body row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Institution</mat-label>
+            <input matInput formControlName="gradInstitution" placeholder="University Name">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subject</mat-label>
+            <input matInput formControlName="gradSubject" placeholder="e.g. B.Sc in CSE">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Grade (CGPA)</mat-label>
+            <input matInput type="number" step="0.01" formControlName="gradGrade" placeholder="e.g. 3.75">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-light font-weight-bold">Post Graduation</div>
+      <div class="card-body row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Institution</mat-label>
+            <input matInput formControlName="postGradInstitution" placeholder="University Name">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Subject</mat-label>
+            <input matInput formControlName="postGradSubject" placeholder="e.g. MBA">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Grade (CGPA)</mat-label>
+            <input matInput type="number" step="0.01" formControlName="postGradGrade" placeholder="e.g. 3.90">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="container text-center mb-5">
+<div class="container text-center mb-5">
+  <button mat-raised-button 
+          class="btn-submit-green shadow" 
+          (click)="saveEducationData()" 
+          [disabled]="!educationForm.valid">
+    <mat-icon class="mr-2">cloud_upload</mat-icon>
+    SUBMIT EDUCATION DETAILS
+  </button>
+</div>
+</div>
+  </form>
+</div>
+
+

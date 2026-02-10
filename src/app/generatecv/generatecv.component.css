@@ -1,0 +1,30 @@
+/* বাটনটি পুরোপুরি সবুজ করার জন্য কাস্টম স্টাইল */
+.btn-generate-cv-green {
+    background-color: #28a745 !important; /* প্রফেশনাল সাকসেস গ্রিন */
+    color: white !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px; /* আপনি যদি একটু চারকোনা পছন্দ করেন */
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* মাউস নিলে হালকা রঙ পরিবর্তন হবে */
+.btn-generate-cv-green:hover {
+    background-color: #218838 !important;
+    transform: scale(1.05); /* হালকা বড় হবে */
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+/* কার্ড এবং অন্যান্য ডিজাইন এলিমেন্ট */
+.border-success-light {
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.bg-success-light {
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+.text-success {
+    color: #28a745 !important;
+}
