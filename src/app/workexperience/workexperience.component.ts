@@ -37,9 +37,12 @@ export class WorkexperienceComponent implements OnInit {
 ngOnInit(): void {
   if(!this.empId){
     this.router.navigateByUrl('logout');
+  }else if(!this.cService.get("username") || this.cService.get("status")!='active'){
+    alert("Admin Blocked Your Account")
+    this.router.navigateByUrl('logout');
+  }else{
+     this.getExperienceData();
   }
-  this.getExperienceData();
-   
 }
 
 get experiences() : FormArray {

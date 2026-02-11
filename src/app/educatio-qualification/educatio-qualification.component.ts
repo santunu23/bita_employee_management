@@ -43,7 +43,8 @@ export class EducatioQualificationComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(!this.cService.get("username")){
+    if(!this.cService.get("username") || this.cService.get("status")!='active'){
+      alert("Admin Blocked Your Account")
       this.router.navigateByUrl('logout');
     }else{
       this.loadEducationData();

@@ -1,0 +1,7 @@
+.user-profile-frame img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.user-profile-frame img:hover {
+  transform: scale(1.1);
+}

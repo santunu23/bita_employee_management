@@ -32,16 +32,25 @@
             <mat-icon class="me-1">school</mat-icon> Education
           </a>
         </li>
+
         <li class="nav-item px-2">
           <a class="nav-link d-flex align-items-center text-white" routerLink="/generatecv">
             <mat-icon class="me-1">description</mat-icon> Generate CV
           </a>
         </li>
 
-        <li class="nav-item ms-lg-3">
+        <li class="nav-item ms-lg-2">
           <a class="nav-link btn btn-outline-light btn-sm px-3 d-flex align-items-center" routerLink="/logout">
             <mat-icon class="me-1" style="font-size: 18px;">logout</mat-icon> Logout
           </a>
+        </li>
+        <li class="nav-item ms-lg-3 d-flex align-items-center">
+          <div class="user-profile-frame">
+            <img [src]="this.userImgUrl || 'assets/img/profile_pic.jpg'" 
+                 alt="User Profile" 
+                 class="rounded-circle border border-2 border-white shadow-sm"
+                 style="width: 40px; height: 40px; object-fit: cover;">
+          </div>
         </li>
 
       </ul>

@@ -16,8 +16,9 @@ landingPageImage:any;
     private router:Router) { }
 
   ngOnInit(): void {
-    if(!this.cService.get("username")){
-      this.router.navigateByUrl('registration');
+    if(!this.cService.get("username") || this.cService.get("status")!='active'){
+      alert("Admin Blocked Your Account")
+      this.router.navigateByUrl('logout');
     }
   }
 

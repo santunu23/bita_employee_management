@@ -35,6 +35,7 @@ export class RegistrationComponent implements OnInit {
       gender: [null, [Validators.required]],
       fname: [null, [Validators.required]],
       mname: [null, [Validators.required]],
+      dob: [null, [Validators.required]],
       maritialstatus: [null, [Validators.required]],
       nationality: [null, [Validators.required]],
       bgroup: [null, [Validators.required]],
@@ -60,7 +61,7 @@ export class RegistrationComponent implements OnInit {
   async submitData() {
     if (this.registrationForm.valid && this.selectedFile) {
       this.spinner.show();
-      console.log("Starting Submission...");
+      // console.log("Starting Submission...");
           const options = {
                 maxSizeMB: 0.2,          // সর্বোচ্চ সাইজ হবে ২০০ কেবি
                 maxWidthOrHeight: 1024,  // সর্বোচ্চ পিক্সেল ১০২৪
@@ -74,8 +75,8 @@ export class RegistrationComponent implements OnInit {
         const credentials = await response.json();
         const empId = credentials.employeeId;
         const pass = credentials.tempPassword;
-        console.log("ID Generated:", empId);
-        console.log("ID Generated:", pass);
+        // console.log("ID Generated:", empId);
+        // console.log("ID Generated:", pass);
         const compressedFile = await imageCompression(this.selectedFile, options);
 
         // ধাপ ২: ছবি আপলোড (আইডি অনুযায়ী নামকরণ)
@@ -85,17 +86,18 @@ export class RegistrationComponent implements OnInit {
 
         // ধাপ ৩: আপলোড শেষ হওয়া পর্যন্ত অপেক্ষা এবং লিঙ্ক নেওয়া
         const snapshot = await task.snapshotChanges().toPromise();
-        console.log("Image Uploaded!");
+        // console.log("Image Uploaded!");
         const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
-        console.log("Download URL:", downloadURL);
+        // console.log("Download URL:", downloadURL);
         // ধাপ ৪: user_details and employee_db তে সেভ
-        console.log("Saving to Firestore...");        
+        // console.log("Saving to Firestore...");        
              
         let userdetailsdata={
               userid: empId,
               password: pass,
               role: 'employee',
-              status: 'active'
+              status: 'active',
+              img: downloadURL
         }
 
         let addnewMember={
@@ -103,6 +105,7 @@ export class RegistrationComponent implements OnInit {
           gtype: this.registrationForm.value['gender'],
           fname: this.registrationForm.value['fname'],
           mname: this.registrationForm.value['mname'],
+          dob:   this.registrationForm.value['dob'],
           maritialstatus: this.registrationForm.value['maritialstatus'],
           bgroup: this.registrationForm.value['bgroup'],
           religion: this.registrationForm.value['religion'],
@@ -122,7 +125,7 @@ export class RegistrationComponent implements OnInit {
                   await this.firebaseservice.submitNewMember(addnewMember)
         ])
       
-        console.log("Firestore Data Saved Successfully!");
+        // console.log("Firestore Data Saved Successfully!");
         this.spinner.hide();
         alert(`Success! Please save your User ID and Password!\n User ID: ${empId}\nPassword: ${pass}`);
         this.registrationForm.reset();

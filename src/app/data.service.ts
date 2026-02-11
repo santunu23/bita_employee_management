@@ -9,21 +9,23 @@ export class DataService {
 
   constructor(private db: AngularFirestore) { }
   async submituserdetails(data:any){
-    console.log("Come to the service.")
+    //console.log("Come to the service.")
     return this.db.collection('/user_details').doc(data.userid).set({
             userid: data.userid,
             password:data.password,
             role: data.role,
-            status: data.status
+            status: data.status,
+            img:data.img
     })
   }
   submitNewMember(resData: any) {
-    console.log(resData);
+    //console.log(resData);
     return this.db.collection('/employee_db').doc(resData.userid).set({
                         fullname:resData.fullname,
                         gtype:resData.gtype,
                         fname:resData.fname,
                         mname:resData.mname,
+                        dob:resData.dob,
                         maritialstatus: resData.maritialstatus,
                         bgroup: resData.bgroup,
                         religion:resData.religion,

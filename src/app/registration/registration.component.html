@@ -96,6 +96,21 @@
                </div>
                </mat-form-field>
               </div>
+              <div class="form-group">
+                  <mat-form-field style="width:100%" appearance="outline">
+                    <mat-label>Date of Birth:</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dob" required readonly (click)="picker.open()" placeholder="Choose your birthday">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-icon matSuffix style="margin-right: 10px;"></mat-icon>
+
+                    <div *ngIf="registrationForm.controls['dob'].invalid && registrationForm.controls['dob'].touched">
+                      <div *ngIf="registrationForm.controls['dob'].errors['required']">
+                        <p class="formerror">Please enter your DOB</p>
+                      </div>
+                    </div>
+                  </mat-form-field>
+                </div>
              <div class="form-group">
                <mat-form-field style="width: 100%" appearance="outline">
                  <mat-label>Select Your Marital Status</mat-label>
@@ -112,7 +127,7 @@
                </mat-form-field>
               </div>
 
-                <div class="form-group">
+              <div class="form-group">
                <mat-form-field style="width:100%" appearance="outline">
                  <mat-label>Blood group:</mat-label> 
                  <input type="text" formControlName="bgroup" required matInput minlength="1" autocomplete="off" class="form-control" matInput placeholder="Your Blood Group.">
@@ -130,17 +145,18 @@
               </div>
 
               <div class="form-group">
-               <mat-form-field style="width:100%" appearance="outline">
-                 <mat-label>Religion:</mat-label> 
-                 <input type="text" formControlName="religion" required matInput minlength="3" autocomplete="off" class="form-control" matInput placeholder="Your Religion.">
-                 <mat-icon matSuffix>self_improvement</mat-icon>
-                 <!-- <mat-hint>Hint</mat-hint> -->
-                 <div *ngIf="registrationForm.controls['religion'].invalid && registrationForm.controls['religion'].touched" > 
-                   <div *ngIf="registrationForm.controls['religion'].errors['required']"> 
-                     <p class="formerror">Please intput your Religion.</p>
-                   </div>
-                   <div *ngIf="registrationForm.controls['religion'].errors['minLength']"> 
-                     <p class="formerror">Please input valid Religion.</p> 
+               <mat-form-field style="width: 100%" appearance="outline">
+                 <mat-label>Select Your Religion</mat-label>
+                 <mat-select  required formControlName="religion"> 
+                   <mat-option value="Islam">Islam</mat-option>
+                   <mat-option value="Hinduism">Hinduism</mat-option>
+                   <mat-option value="Buddhism">Buddhism</mat-option>
+                   <mat-option value="Christianity">Christianity</mat-option>
+                 </mat-select>
+                 <mat-icon matSuffix>sparkles</mat-icon>
+                 <div *ngIf="registrationForm.controls['religion'].invalid && registrationForm.controls['religion'].touched" >
+                   <div *ngIf="registrationForm.controls['religion'].errors['required']">
+                     <p class="formerror">Please fill up the Religion field.</p>
                    </div>
                </div>
                </mat-form-field>
@@ -177,23 +193,23 @@
                </div>
                </mat-form-field>
               </div>
-               <div class="form-group">
-               <mat-form-field style="width:100%" appearance="outline">
-                 <mat-label>Nationality:</mat-label> 
-                 <input type="text" formControlName="nationality" required matInput minlength="3" autocomplete="off" class="form-control" matInput placeholder="Your Nationality.">
+              <div class="form-group">
+               <mat-form-field style="width: 100%" appearance="outline">
+                 <mat-label>Select Your Nationality</mat-label>
+                 <mat-select  required formControlName="nationality">
+                   <mat-option value="Bangladeshi by Birth">Bangladeshi by Birth</mat-option>
+                   <mat-option value="Bangladeshi by Naturalization">Bangladeshi by Naturalization</mat-option>
+                   <mat-option value="Dual Nationality">Dual Nationality</mat-option>
+                 </mat-select>
                  <mat-icon matSuffix>public</mat-icon>
-                 <!-- <mat-hint>Hint</mat-hint> -->
-                 <div *ngIf="registrationForm.controls['nationality'].invalid && registrationForm.controls['nationality'].touched" > 
-                   <div *ngIf="registrationForm.controls['nationality'].errors['required']"> 
-                     <p class="formerror">Please intput your nationality</p>
-                   </div>
-                   <div *ngIf="registrationForm.controls['nationality'].errors['minLength']"> 
-                     <p class="formerror">Please input valid your nationality.</p> 
+                 <div *ngIf="registrationForm.controls['nationality'].invalid && registrationForm.controls['nationality'].touched" >
+                   <div *ngIf="registrationForm.controls['nationality'].errors['required']">
+                     <p class="formerror">Please fill up the nationality field.</p>
                    </div>
                </div>
                </mat-form-field>
               </div>
-                <div class="form-group">
+              <div class="form-group">
                <mat-form-field style="width:100%" appearance="outline">
                  <mat-label>National ID NO:</mat-label> 
                  <input type="text" formControlName="nino" required matInput minlength="3" autocomplete="off" class="form-control" matInput placeholder="Your NID Card No.">
