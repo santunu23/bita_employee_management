@@ -14,7 +14,7 @@
 //     // ৬ ডিজিটের পাসওয়ার্ড তৈরি
 //     const tempPassword = Math.random().toString(36).substring(2, 8);
     
-//     // ডাটা রিটার্ন করার সময় 'data' প্রপার্টির ভেতরে রাখা ভালো
+//     // ডাটা রিটার্ন করার সময় 'data' প্রপার্টির ভেতরে রাখা রাখলাম
 //     return {
 //         employeeId: employeeId,
 //         tempPassword: tempPassword
@@ -24,7 +24,7 @@
 
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-const cors = require('cors')({origin: true});
+const cors = require('cors')({origin: true});// এই লাইনটি corns ভেলিডেশানের জন্য তৈরি করা হয়েছে। 
 
 admin.initializeApp();
 
