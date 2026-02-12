@@ -1,27 +1,56 @@
-# EmployeeDatabaseProject
+# 📊 **BITA-EmployeeDB**
+## A Modern Employee Management Solution for BITA
+**BITA-EmployeeDB** is a streamlined Employee Management System developed for the
+internal staff registration and data management of the Bangladesh Institute of
+Theatre Arts (BITA). Built with a focus on scalability and security, it leverages
+Angular for a dynamic frontend and Firebase for robust backend services.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+## 🚀 **Key Features**
+🔑 **Automated Credentials:** Uses Firebase Cloud Functions to automatically generate
+unique User IDs and Passwords for every employee upon registration.
+🖼️ **Smart Image Upload:** Integrated browser-image-compression to compress profile photos below 200KB before upload, ensuring storage efficiency.
+✅ **Data Integrity:** Implemented standardized dropdown menus (e.g., Religion: Hinduism/Islam, Blood Group) to ensure high-quality, consistent data entry.
+🔒 **Secure Session Management:** Cookie-based authentication that persists user data and displays the employee's profile picture directly in the navigation bar.
+🌐 **CORS Optimized:** Configured Google Cloud Storage CORS policies to allow
+seamless, secure cross-origin image uploads from the web application.
 
-## Development server
+## 🛠 **Tech Stack**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+| Category | Technology |
+| :--- | :--- |
+| **Frontend** | Angular 19 (Material UI, Bootstrap) |
+| **Backend** | Firebase (Cloud Functions, Firestore DB) |
+| **Storage** | Firebase Cloud Storage |
+| **Version Control** | Git & GitHub |
+| **Methodology** | Data Engineering Principles (IBM Professional Certificate) |
 
-## Code scaffolding
+## 🏗 **System Architecture**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```mermaid
+graph TD
+    A[👤 Employee] -->|Registration| B(🅰️ Angular App)
+    B -->|Trigger| C{☁️ Cloud Functions}
+    C -->|Generate| D[🆔 Credentials]
+    B -->|Compress & Upload| E[📂 Firebase Storage]
+    B -->|Store Record| F[🔥 Firestore DB]
+    F -->|Display| G[💻 User Dashboard]
+```
+    
+## ⚙️ **Setup and Installation**
 
-## Build
+1. Clone the repository:
+ ```git clone https://github.com/santunu23/bita_employee_management.git```
+2. Install dependencies:
+ ```npm install```
+3. Firebase Configuration: Add your Firebase API Keys and Project ID into the ```src/environments/environment.ts``` file.
+4. Run Development Server: ```ng serve```
+Navigate to ```http://localhost:4200/ ```in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📈 **Project Status**
 
-## Running unit tests
+The application is currently in the User Acceptance Testing (UAT) phase. Feedback
+is being gathered from BITA colleagues to continuously refine the user experience
+and add new features.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 👨‍💻 **Developed By**
+**Joy Sen** ,IT Expert & Business Development Officer, Bangladesh Institute of Theatre Arts (BITA)
