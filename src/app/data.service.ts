@@ -28,7 +28,7 @@ export class DataService {
                         dob:resData.dob,
                         maritialstatus: resData.maritialstatus,
                         bgroup: resData.bgroup,
-                        religion:resData.religion,
+                        // religion:resData.religion,
                         paddress:resData.paddress,
                         praddress:resData.praddress,
                         nationality:resData.nationality,
