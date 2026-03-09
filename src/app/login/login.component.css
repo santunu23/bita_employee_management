@@ -33,7 +33,7 @@
   color: #3f51b5;
   text-decoration: none;
 }
-
+/* hover forget password link */
 .forgot-password-link:hover {
   text-decoration: underline;
 }
