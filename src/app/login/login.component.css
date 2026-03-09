@@ -14,7 +14,7 @@
   height: auto;
   object-fit: contain;
 }
-
+/* Add login title */
 .login-title {
   color: #01b32d; /* Angular Material primary color */
   font-weight: 700;
