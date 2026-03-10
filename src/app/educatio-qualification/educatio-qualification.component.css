@@ -1,7 +1,7 @@
 /* Custom style in submit button */
 .btn-submit-green {
     background-color: #28a745 !important; /* Success Green Color */
-    color: white !important; /* লেখার রঙ সাদা */
+    color: white !important; /* Text color White */
     font-weight: 500;
     padding: 10px 30px;
     border-radius: 5px;
