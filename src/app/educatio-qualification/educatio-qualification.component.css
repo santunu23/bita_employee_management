@@ -8,7 +8,7 @@
     transition: background-color 0.3s ease;
 }
 
-/* মাউস নিলে হালকা গাঢ় রঙ হবে */
+/* Add hover effect */
 .btn-submit-green:hover {
     background-color: #218838 !important;
 }
