@@ -12,7 +12,7 @@
 
       <mat-card class="mb-4 p-3 p-md-4">
         <form [formGroup]="trainingDataForm" (ngSubmit)="saveAllData()">
-          
+          <!-- training div -->
           <div formArrayName="training">
             <div *ngFor="let exp of training.controls; let i=index" [formGroupName]="i" class="card mb-4 border-info shadow-sm">
               
